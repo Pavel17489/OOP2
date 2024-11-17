@@ -1,12 +1,12 @@
 package ru.netology.domain;
 
 class Radio {
-    int currentStation;
-    int minStation = 0;
-    int maxStation = 9;
-    int currentVolume;
-    int minVolume = 0;
-    int maxVolume = 100;
+    private int currentStation;
+    private int minStation = 0;
+    private int maxStation = 9;
+    private int currentVolume;
+    private int minVolume = 0;
+    private int maxVolume = 100;
 
     int getCurrentStation() {
         return currentStation;
@@ -24,16 +24,14 @@ class Radio {
     }
 
     //Использование кнопки NEXT
-    void nextStation(int currentStation) {
-        this.currentStation = currentStation;
+    void nextStation() {
         if (currentStation == maxStation) {
             setCurrentStation(minStation);
         } else setCurrentStation(currentStation + 1);
     }
 
     //Использование кнопки PREV
-    void prevStation(int currentStation) {
-        this.currentStation = currentStation;
+    void prevStation() {
         if (currentStation == minStation) {
             setCurrentStation(maxStation);
         } else setCurrentStation(currentStation - 1);
@@ -43,22 +41,31 @@ class Radio {
         return currentVolume;
     }
 
-    //Увеличение громкости
-    void increaseVolume(int newCurrentVolume) {
-        this.currentVolume = newCurrentVolume;
-        if (newCurrentVolume == maxVolume) {
+    //Установка лимитов громкости
+    void setCurrentVolume(int newCurrentVolume) {
+        if (newCurrentVolume < minVolume) {
             return;
         }
-        this.currentVolume += 1;
+        if (newCurrentVolume > maxVolume) {
+            return;
+        }
+        currentVolume = newCurrentVolume;
+    }
+
+    //Увеличение громкости
+    void increaseVolume() {
+        if (currentVolume == maxVolume) {
+            return;
+        }
+        currentVolume += 1;
     }
 
     //Уменьшение громкости
-    void decreaseVolume(int newCurrentVolume) {
-        this.currentVolume = newCurrentVolume;
-        if (newCurrentVolume == minVolume) {
+    void decreaseVolume() {
+        if (currentVolume == minVolume) {
             return;
         }
-        this.currentVolume -= 1;
+        currentVolume -= 1;
     }
 }
 
