@@ -27,14 +27,18 @@ class Radio {
     void nextStation() {
         if (currentStation == maxStation) {
             setCurrentStation(minStation);
-        } else setCurrentStation(currentStation + 1);
+        } else {
+            setCurrentStation(currentStation + 1);
+        }
     }
 
     //Использование кнопки PREV
     void prevStation() {
         if (currentStation == minStation) {
             setCurrentStation(maxStation);
-        } else setCurrentStation(currentStation - 1);
+        } else {
+            setCurrentStation(currentStation - 1);
+        }
     }
 
     int getCurrentVolume() {
@@ -54,7 +58,7 @@ class Radio {
 
     //Увеличение громкости
     void increaseVolume() {
-        if (currentVolume == maxVolume) {
+        if (currentVolume >= maxVolume) {
             return;
         }
         currentVolume += 1;
@@ -62,10 +66,9 @@ class Radio {
 
     //Уменьшение громкости
     void decreaseVolume() {
-        if (currentVolume == minVolume) {
+        if (currentVolume <= minVolume) {
             return;
         }
         currentVolume -= 1;
     }
 }
-

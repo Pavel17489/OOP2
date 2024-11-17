@@ -83,5 +83,18 @@ public class RadioTest {
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected,actual);
     }
+    @ParameterizedTest
+    @CsvSource({
+            "0,-1",
+            "0,101",
+            "0,-5",
+            "0,105"
+    })
+    public void shouldNotSetVolumeAboveRange(int expected, int newCurrentVolume){
+        Radio radio = new Radio();
+        radio.setCurrentVolume(newCurrentVolume);
+        int actual = radio.getCurrentVolume();
+        Assertions.assertEquals(expected,actual);
+    }
 }
 
