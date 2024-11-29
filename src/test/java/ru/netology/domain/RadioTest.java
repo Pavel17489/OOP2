@@ -36,7 +36,7 @@ public class RadioTest {
         radio.setCurrentStation(newCurrentStation);
         radio.nextStation();
         int actual = radio.getCurrentStation();
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest
@@ -61,12 +61,12 @@ public class RadioTest {
             "100,99",
             "100,100"
     })
-    public void shouldIncreaseVolume(int expected, int newCurrentVolume){
+    public void shouldIncreaseVolume(int expected, int newCurrentVolume) {
         Radio radio = new Radio();
         radio.setCurrentVolume(newCurrentVolume);
         radio.increaseVolume();
         int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest
@@ -76,13 +76,14 @@ public class RadioTest {
             "0,1",
             "0,0"
     })
-    public void shouldDecreaseVolume(int expected, int newCurrentVolume){
+    public void shouldDecreaseVolume(int expected, int newCurrentVolume) {
         Radio radio = new Radio();
         radio.setCurrentVolume(newCurrentVolume);
         radio.decreaseVolume();
         int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
+
     @ParameterizedTest
     @CsvSource({
             "0,-1",
@@ -90,11 +91,39 @@ public class RadioTest {
             "0,-5",
             "0,105"
     })
-    public void shouldNotSetVolumeAboveRange(int expected, int newCurrentVolume){
+    public void shouldNotSetVolumeAboveRange(int expected, int newCurrentVolume) {
         Radio radio = new Radio();
         radio.setCurrentVolume(newCurrentVolume);
         int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0,10,11",
+            "0,10,10",
+            "9,10,9",
+            "8,10,8",
+            "4,10,4",
+            "1,10,1",
+            "0,10,0",
+            "0,10,-1",
+            "0,1,1",
+            "0,1,2",
+            "0,1,5",
+            "0,1,0",
+            "0,1,-1",
+            "0,1,-5"
+    })
+    public void shouldSetQuantityStation(int expected, int quantity, int newCurrentStation) {
+
+        Radio radio = new Radio(quantity);
+
+        radio.setCurrentStation(newCurrentStation);
+
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+
     }
 }
 
